@@ -8,7 +8,7 @@ import 'firebase/auth';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { useCollectionData } from 'react-firebase-hooks/firestore';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 firebase.initializeApp({
 	apiKey: 'AIzaSyCABhQoF1w6kpMoRCJIJgMYMnN0N99lcdw',
@@ -69,10 +69,13 @@ function SignOut() {
 function ChatRoom() {
 	const dummy = useRef<HTMLInputElement>(null);
 	const messagesRef = firestore.collection('messages');
-	const query = messagesRef.orderBy('createdAt', "desc").limit(25);
+	const query = messagesRef.orderBy('createdAt', "asc").limit(100);
 
 	const [messages] = useCollectionData(query, { idField: 'id' });
-	messages?.reverse();
+
+	// useEffect(() => {
+	// 	messages?.sort((a, b) => a.createdAt.seconds - b.createdAt.seconds);
+	// }, [messages]);
 
 	const [formValue, setFormValue] = useState('');
 
