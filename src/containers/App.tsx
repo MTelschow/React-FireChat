@@ -49,7 +49,7 @@ function SignIn() {
 			<button className='sign-in' onClick={signInWithGoogle}>
 				Sign in with Google
 			</button>
-			<p>
+			<p className='sign-in-message'>
 				Do not violate the community guidelines or you will be banned for life!
 			</p>
 		</div>
